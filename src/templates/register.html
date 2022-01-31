@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section register-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group" >
+                <legend class="border-bottom mb-4" style="text-align:center">Admin User Registration</legend>
+                <div class="form-group" style="margin-left: 420;padding-right: 365;">
+                    {{ form.full_name.label(class="form-control-label" ,style="padding-left:10px")}}
+
+                    {% if form.full_name.errors %}
+                        {{ form.full_name(class="form-control form-control-sm is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.full_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.full_name(class="form-control form-control-sm" ,style="width:325px") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group" style="margin-left: 420;padding-right: 365;">
+                    {{ form.login_id.label(class="form-control-label",style="padding-left:10px") }}
+                    {% if form.login_id.errors %}
+                        {{ form.login_id(class="form-control form-control-sm is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.login_id.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.login_id(class="form-control form-control-sm",style="width:325px") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group" style="margin-left: 420;padding-right: 365;">
+                    {{ form.password.label(class="form-control-label",style="padding-left:10px")}}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-sm is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-sm",style="width:325px") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group" style="margin-left: 420;padding-right: 365;">
+                    {{ form.confirm_password.label(class="form-control-label",style="padding-left:10px") }}
+                    {% if form.confirm_password.errors %}
+                        {{ form.confirm_password(class="form-control form-control-sm is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.confirm_password(class="form-control form-control-sm",style="width:325px") }}
+                    {% endif %}
+                </div>
+
+            </fieldset>
+
+
+            <div class="form-group" style="float:right;margin-right:365px" >
+                {{ form.submit(class="btn btn-outline-info",style="background-color:#4bb5f5;color:white") }}
+            </div>
+        </form>
+    </div>
+{% endblock content %}

@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block content %}<br>
+<div class="container">
+    <div class="row border-bottom mb-3">
+        <div class="col">
+
+        </div>
+        <div class="col d-flex justify-content-center">
+            <h3>Candidate Record</h3>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <div>
+                <a class="btn btn-info" href="{{ url_for('admin.report') }}" role="button">Back</a>
+                <a class="btn btn-danger" href="{{ url_for('admin.logout') }}" role="button">Logout</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table m-3">
+            <thead>
+                <tr style="background-color: rgb(31, 48, 58); color: white; ">
+                    <th class="border border-light" scope="col">Date</th>
+                    <th class="border border-light" scope="col">Login Id</th>
+                    <th class="border border-light" scope="col">Status</th>
+                    <th class="border border-light" scope="col">Start Time</th>
+                    <th class="border border-light" scope="col">End Time</th>
+                    <th class="border border-light" scope="col">Marks</th>
+                    <th class="border border-light" scope="col">Result Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                <tr>
+                    <th class="border border-light" scope="col">{{ record.date_modified }}</th>
+                    <th class="border border-light" scope="col">{{ record.login_id }}</th>
+                    {% if record.result_status == 0 %}
+                    <th class="border border-light" scope="col">{{ status.0 }}</th>
+                    {% elif record.result_status == 1 %}
+                    <th class="border border-light" scope="col">{{ status.1 }}</th>
+                    {% elif record.result_status == 2 %}
+                    <th class="border border-light" scope="col">{{ status.2 }}</th>
+                    {% elif record.result_status == 3 %}
+                    <th class="border border-light" scope="col">{{ status.3 }}</th>
+                    {% endif %}
+                    <th class="border border-light" scope="col">{{ record.start_time }}</th>
+                    <th class="border border-light" scope="col">{{ record.end_time }}</th>
+                    <th class="border border-light" scope="col">{{ record.marks }}</th>
+                    {% if record.result_status == 0 %}
+                    <th class="border border-light" scope="col">{{ result_status.0 }}</th>
+                    {% else %}
+                    <th class="border border-light" scope="col">{{ result_status.1 }}</th>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

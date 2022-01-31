@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content %}
+    <br>
+    <div class="content-section login-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4" style="text-align:center">Welcome To IndoreAI Solutions Career </legend>
+
+                <div class="form-group">
+                    {{ form.login_id.label(class="form-control-label",style="padding-left:420px") }}
+                    {% if form.login_id.errors %}
+                        {{ form.login_id(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.login_id.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.login_id(class="form-control form-control-sm",style="margin-left:420px ; width:325px") }}
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.password.label(class="form-control-label",style="padding-left:420px") }}
+                    {% if form.password.errors %}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.password(class="form-control form-control-sm",style="margin-left:420px ; width:325px") }}
+                    {% endif %}
+                </div>
+                <div class="form-check" style="margin-left:420px">
+                    {{ form.remember(class="form-check-input") }}
+                    {{ form.remember.label(class="form-check-label") }}
+                </div>
+            </fieldset>
+            <div class="form-group" style="float:right;margin-right:365px">
+                {{ form.submit(class="btn btn-outline-info",style="background-color:#4bb5f5;color:white" ) }}
+                <small class="text-muted ml-2" >
+                </small>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

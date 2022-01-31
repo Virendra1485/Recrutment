@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+<br>
+<div class="container">
+    <div class="row border-bottom mb-3">
+        <div class="col">
+
+        </div>
+        <div class="col d-flex justify-content-center">
+            <h3>Upload Questions</h3>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <div>
+                <a class="btn btn-info" href="{{ url_for('admin.dashboard') }}" role="button">Back</a>
+                <a class="btn btn-danger" href="{{ url_for('admin.logout') }}" role="button">Logout</a>
+            </div>
+        </div>
+    </div>
+    <form method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <div class="col">
+                {{ form.questions.label(class="form-control-label", name='rsm') }}
+                {% if form.questions.errors %}
+                    {{ form.questions(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.questions.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.questions(class="form-control") }}
+                {% endif %}
+            </div>
+        </div><br>
+        <div class="col d-flex justify-content-end">
+            <div>
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+  <h3 class="border-bottom mb-4" style="text-align:center">IndoreAi Online Assessment </h3>
+  <a class="btn btn-danger" style="float:right;background-color:red;display:inline;margin-right: -17px;" href="{{ url_for('candidate.logout') }}">Logout</a>
+
+  <form method="post">
+    {{ form.hidden_tag() }}
+    <div class="row">
+      <div class="col">
+        Q.{{ sequence_no }} {{ question.question }}
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col">
+        <pre>
+         {{ question.code }}
+        </pre>
+      </div>
+    </div>
+    {{ form.options(type="A") }}
+    <br>
+    <br>
+    <div class="row">
+      <div class="col">
+        {% if questions_set.sequence_no == 1 %}
+        {% else %}
+        <a href="{{ url_for('candidate.test', sequence_no=questions_set.sequence_no-1) }}">
+        <button type="button" class="btn btn-primary">&lt;&lt;&nbsp;Previous</button>
+        </a>
+        {% endif %}
+      </div>
+      <div class="col col-md-4">
+        {% if questions_set.is_last %}
+        <a href=""><button type="submit" class="btn btn-primary">Next&nbsp;&gt;&gt;</button></a>
+        {% else %}
+        <a href=""><button type="submit" class="btn btn-primary">Next&nbsp;&gt;&gt;</button></a>
+        {% endif %}
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

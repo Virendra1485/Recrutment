@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <br>
+    <div>
+        <div class="row border-bottom mb-3">
+            <div class="col d-flex justify-content-start">
+
+            </div>
+            <div class="col d-flex justify-content-center">
+                <h3>Candidate Report</h3>
+            </div>
+            <div class="col d-flex justify-content-end">
+                <div>
+                    <a class="btn btn-info" href="{{ url_for('admin.dashboard') }}" role="button">Back</a>
+                    <a class="btn btn-danger" href="{{ url_for('admin.logout') }}" role="button">Logout</a>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <form method="post">
+            {{ form.hidden_tag() }}
+            <div class="row">
+                <div class="col">
+                    {{ form.start_date.label(class="form-control-label") }}
+                    {% if form.start_date.errors %}
+                        {{ form.start_date(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.start_date.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.start_date(class="form-control", placeholder="YY-MM-DD") }}
+                    {% endif %}
+                </div>
+                <div class="col">
+                    {{ form.end_time.label(class="form-control-label") }}
+                    {% if form.end_time.errors %}
+                        {{ form.end_time(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.end_time.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.end_time(class="form-control", placeholder="YY-MM-DD") }}
+                    {% endif %}
+                </div>
+            </div><br>
+
+
+
+
+            <center>{{ form.submit(class="btn btn-primary") }}</center>
+        </form>
+    </div>
+</div>
+{% endblock %}

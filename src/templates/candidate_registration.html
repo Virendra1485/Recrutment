@@ -1,0 +1,397 @@
+{% extends "layout.html" %}
+{% block content %}
+<br>
+<div class="container">
+    <div>
+        <div class="row border-bottom mb-3">
+            <div class="col d-flex justify-content-start">
+            </div>
+            <div class="col d-flex justify-content-center">
+                <h3>Candidate Registration</h3>
+            </div>
+            <div class="col d-flex justify-content-end">
+                <div>
+                    {% if user %}
+                <a class="btn btn-info" href="{{ url_for('admin.userlist') }}" role="button">Back</a>
+                <a class="btn btn-danger" href="{{ url_for('admin.logout') }}" role="button">Logout</a>
+                {% else %}
+                {% endif %}
+                </div>
+            </div>
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <div class="row">
+                <div class="col">
+                    <div class="form-control-label border-bottom border-primary" style="color: Blue">Personal Detail</div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    {{ form.first_name.label(class="form-control-label") }}
+                    {% if form.first_name.errors %}
+                        {{ form.first_name(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.first_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.first_name(class="form-control", placeholder="First Name") }}
+                    {% endif %}
+                </div>
+                <div class="col">
+                    {{ form.last_name.label(class="form-control-label") }}
+                    {% if form.last_name.errors %}
+                        {{ form.last_name(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.last_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.last_name(class="form-control", placeholder="Last Name") }}
+                    {% endif %}
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    {{ form.email_id.label(class="form-control-label") }}
+                    {% if form.email_id.errors %}
+                        {{ form.email_id(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.email_id.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email_id(class="form-control", placeholder="Email Id") }}
+                    {% endif %}
+                </div>
+                <div class="col">
+                    {{ form.mobile_no.label(class="form-control-label") }}
+                    {% if form.mobile_no.errors %}
+                        {{ form.mobile_no(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.mobile_no.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.mobile_no(class="form-control", placeholder="Mobile No") }}
+                    {% endif %}
+                    </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    {{ form.state.label(class="form-control-label") }}
+                    {% if form.state.errors %}
+                        {{ form.state(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.state.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.state(class="form-control", placeholder="State") }}
+                    {% endif %}
+                </div>
+                <div class="col">
+                    {{ form.city.label(class="form-control-label") }}
+                    {% if form.city.errors %}
+                        {{ form.city(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.city.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.city(class="form-control", placeholder="City") }}
+                    {% endif %}
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    <div class="form-control-label border-bottom border-primary" style="color: Blue">Education Detail</div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    {{ form.ssc_board.label(class="form-control-label") }}
+                    {% if form.ssc_board.errors %}
+                        {{ form.ssc_board(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.ssc_board.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.ssc_board(class="form-control", placeholder="10th Board Name") }}
+                    {% endif %}
+                </div>
+                <div class="col">
+                    {{ form.ssc_marks.label(class="form-control-label") }}
+                    {% if form.ssc_marks.errors %}
+                        {{ form.ssc_marks(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.ssc_marks.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.ssc_marks(class="form-control", placeholder="10th Board Marks") }}
+                    {% endif %}
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    {{ form.hsc_board.label(class="form-control-label") }}
+                    {% if form.hsc_board.errors %}
+                        {{ form.hsc_board(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.hsc_board.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.hsc_board(class="form-control", placeholder="12th Board Name") }}
+                    {% endif %}
+                </div>
+                <div class="col">
+                    {{ form.hsc_marks.label(class="form-control-label") }}
+                    {% if form.hsc_marks.errors %}
+                        {{ form.hsc_marks(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.hsc_marks.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.hsc_marks(class="form-control", placeholder="12th Board Marks") }}
+                    {% endif %}
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    <div class="form-control-label border-bottom border-primary" style="color: Blue">Graduation Detail</div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    {{ form.ug_degree.label(class="form-control-label") }}
+                    {% if form.ug_degree.errors %}
+                        {{ form.ug_degree(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.ug_degree.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.ug_degree(class="form-control", placeholder="Degree Name") }}
+                    {% endif %}
+                </div>
+                <div class="col">
+                    {{ form.ug_college.label(class="form-control-label") }}
+                    {% if form.ug_college.errors %}
+                        {{ form.ug_college(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.ug_college.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.ug_college(class="form-control", placeholder="College Name") }}
+                    {% endif %}
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    {{ form.ug_university.label(class="form-control-label") }}
+                    {% if form.ug_university.errors %}
+                        {{ form.ug_university(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.ug_university.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.ug_university(class="form-control", placeholder="University Name") }}
+                    {% endif %}
+                </div>
+                <div class="col">
+                    {{ form.ug_marks.label(class="form-control-label") }}
+                    {% if form.ug_marks.errors %}
+                        {{ form.ug_marks(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.ug_marks.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.ug_marks(class="form-control", placeholder="Graduation Marks In Percentage") }}
+                    {% endif %}
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    <div class="form-control-label border-bottom border-primary" style="color: Blue">Post-Graduation Detail</div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    {{ form.pg_degree.label(class="form-control-label") }}
+                    {% if form.pg_degree.errors %}
+                        {{ form.pg_degree(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.pg_degree.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.pg_degree(class="form-control", placeholder="Post-Graduation Degree Name") }}
+                    {% endif %}
+                </div>
+                <div class="col">
+                    {{ form.pg_college.label(class="form-control-label") }}
+                    {% if form.pg_college.errors %}
+                        {{ form.pg_college(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.pg_college.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.pg_college(class="form-control", placeholder="College Name") }}
+                    {% endif %}
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    {{ form.pg_university.label(class="form-control-label") }}
+                    {% if form.pg_university.errors %}
+                        {{ form.pg_university(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.pg_university.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.pg_university(class="form-control", placeholder="University Name") }}
+                    {% endif %}
+                </div>
+                <div class="col">
+                    {{ form.pg_marks.label(class="form-control-label") }}
+                    {% if form.pg_marks.errors %}
+                        {{ form.pg_marks(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.pg_marks.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.pg_marks(class="form-control", placeholder="Post-Graduation Marks In Percent") }}
+                    {% endif %}
+                </div>
+            </div><br>
+            <div class="border-bottom border-primary"></div><br>
+            <div class="row">
+                <div class="col">
+                    {{ form.skill.label(class="form-control-label") }}
+                    {% if form.skill.errors %}
+                        {{ form.skill(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.skill.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.skill(class="form-control", placeholder="Technical Proficency") }}
+                    {% endif %}
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    {{ form.linked_link.label(class="form-control-label") }}
+                    {% if form.linked_link.errors %}
+                        {{ form.linked_link(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.linked_link.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.linked_link(class="form-control", placeholder="Linked Link") }}
+                    {% endif %}
+                </div>
+                <div class="col">
+                    {{ form.skype_id.label(class="form-control-label") }}
+                    {% if form.skype_id.errors %}
+                        {{ form.skype_id(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.skype_id.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.skype_id(class="form-control", placeholder="Skype Id") }}
+                    {% endif %}
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    <div class="form-control-label" style="color: Blue">Upload Resume</div>
+                </div>
+            </div>
+            <div class="border-bottom border-primary"></div><br>
+            <div class="row">
+                <div class="col">
+                    {{ form.resume_remark.label(class="form-control-label") }}
+                    {% if form.resume_remark.errors %}
+                        {{ form.resume_remark(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.resume_remark.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.resume_remark(class="form-control", placeholder="Resume Remark") }}
+                    {% endif %}
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+                    {{ form.resume.label(class="form-control-label", name='rsm') }}
+                    {% if form.resume.errors %}
+                        {{ form.resume(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.resume.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.resume(class="form-control") }}
+                    {% endif %}
+                </div>
+            </div><br>
+            <div class="row">
+                <div class="col">
+
+                </div>
+                <div class="col">
+
+                </div>
+                <div class="col d-flex justify-content-end">
+                    <div>
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock %}

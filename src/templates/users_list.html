@@ -1,0 +1,56 @@
+
+{% extends "layout.html" %}
+{% block content %}<br>
+
+<div class="container">
+    <div class="row">
+        <div class="col d-flex justify-content-start">
+            <div>
+                <a class="btn btn-primary" href="{{ url_for('admin.add_candidate') }}" style='background-color: #4bb5f5;'>Add New Candidate</a>
+            </div>
+        </div>
+        <div class="col d-flex justify-content-center">
+            <h2>Manage Users</h2>
+        </div>
+        <div class="col d-flex justify-content-end">
+            <div>
+                <a class="btn btn-info"  href="{{ url_for('admin.dashboard') }}">Back</a>
+                <a class="btn btn-danger"  href="{{ url_for('admin.logout') }}">Logout</a>
+            </div>
+        </div>
+    </div>
+    <div>
+        <table class="table">
+            <thead>
+                <tr  style="background-color: rgb(31, 48, 58); color: white; ">
+                  <th class="border border-light" scope="col">Full Name</th>
+                  <th class="border border-light" scope="col">Login Id</th>
+                  <th class="border border-light" scope="col" style="width:200">Status</th>
+                  <th class="border border-light" scope="col">Action</th>
+                  <th class="border border-light" scope="col">Assign Test</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td><a href="{{ url_for('admin.update_candidate', login_id=user.login_id) }}">{{user.full_name}}</a></td>
+                    <td>{{user.login_id}}</td>
+                    <td>{{ 'Enabled' if user.enable else 'Disabled' }} &nbsp;
+                         <a  class="btn btn-primary" href="/admin/userlist_u/{{ user.id }}" style='background-color: #4bb5f5'>{{ 'Disable' if user.enable else 'Enable' }}</a>
+                    </td>
+                    <td>
+                         <a class="btn btn-warning" href="{{ url_for('admin.edit_password' ,id=user.id) }}" style='background-color: orange'>Reset Password</a>
+                         <a class="btn btn-danger" href="{{ url_for('admin.delete_user', id=user.id) }}" style='background-color: red;' , onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                    </td>
+                    <td>
+                         <a  class="btn btn-primary" href="{{ url_for('admin.assign_test', login_id=user.login_id) }}" style='background-color: #4bb5f5'>
+                             Assign Test
+                         </a>
+                    </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,64 @@
+version: "3.7"
+services:
+  user_edge:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8 --collation-server=utf8_unicode_ci --datadir=/data/db/recruitment
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: user_db
+    ports:
+      - 3307:3306
+    volumes:
+      - data.vol:/data
+    logging:
+      driver: journald
+      options:
+        tag: scorer-user_edge_database
+    restart: always
+    tty: true
+
+  adminer_container:
+    image: adminer:latest
+    environment:
+      ADMINER_DEFAULT_SERVER: user_edge
+    ports:
+      - 8081:8080
+    logging:
+      driver: journald
+      options:
+        tag: scorer-user_edge_adminer
+    restart: always
+    tty: true
+
+  api:
+    build:
+      context: ./src
+    image: user-edge-api:0.0.1
+    depends_on:
+      - user_edge
+    environment:
+      PORT: 30000
+      THREAD_COUNT: 2
+      LOG_LEVEL: 2
+      DB_URL: 'mysql+pymysql://root:root@user_edge:3306/user_db'
+      LOGIN_URL: 'http://127.0.0.1:30000/api/v1'
+      USER_UPDATE_NOTIFICATION_EP: 'tcp://*:30001'
+      DEFAULT_PASSWORD: 'python@123'
+      TEST_DIFFICULTY_LEVEL: 2
+      NO_OF_QUESTION_EACH_LEVEL: 10
+      SUCCESS_PERCENTAGE: 60
+    ports:
+      - "30000:30000"
+      - "30001:30001"
+    logging:
+      driver: journald
+      options:
+        tag: scorer-user_edge_api
+    restart: always
+    tty: true
+
+
+volumes:
+   data.vol:
+     external: true
+
